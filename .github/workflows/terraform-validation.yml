@@ -15,3 +15,6 @@ jobs:
 
       - name: Terraform version
         run: terraform version
+
+      - name: Google Cloud CLI Version
+        run: gcloud version
