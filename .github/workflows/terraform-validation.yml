@@ -18,3 +18,12 @@ jobs:
 
       - name: Google Cloud CLI Version
         run: gcloud version
+
+      - name: Terraform fmt
+        run: terraform -chdir=terraform fmt -check -recursive
+
+      - name: Terraform init
+        run: terraform -chdir=terraform init
+
+      - name: Terraform validate
+        run: terraform -chdir=terraform validate
