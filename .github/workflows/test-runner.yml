@@ -1,21 +1,21 @@
-name: Test Runner
+name: Terraform Validation
 
 on:
-  workflow_dispatch:
+  push:
 
 jobs:
-  test:
+  validate:
     runs-on: [self-hosted, platform-runner]
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Print runner info
+      - name: Show Runner Info
         run: |
           echo "Runner is working"
           whoami
           pwd
+          hostname
 
       - name: Terraform Version
         run: terraform version
