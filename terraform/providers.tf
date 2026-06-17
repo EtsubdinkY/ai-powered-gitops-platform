@@ -12,6 +12,4 @@ terraform {
 provider "google" {
   project = "project-ff80b6ff-8c4e-4127-89e"
   region  = "us-central1"
-
-  impersonate_service_account = "terraform-deployer@project-ff80b6ff-8c4e-4127-89e.iam.gserviceaccount.com"
 }
