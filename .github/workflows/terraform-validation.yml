@@ -5,6 +5,10 @@ on:
     branches:
       - main
 
+permissions:
+  contents: read
+  id-token: write
+
 jobs:
   validate:
     runs-on: [self-hosted, platform-runner]
@@ -12,6 +16,17 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+
+      - name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: projects/75857734333/locations/global/workloadIdentityPools/github-pool/providers/github-provider
+          service_account: terraform-deployer@project-ff80b6ff-8c4e-4127-89e.iam.gserviceaccount.com
+
+      - name: Verify GCP Authentication
+        run: |
+          gcloud auth list
+          gcloud config list project
 
       - name: Terraform version
         run: terraform version
