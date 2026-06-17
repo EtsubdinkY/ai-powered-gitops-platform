@@ -45,3 +45,6 @@ jobs:
 
       - name: Terraform apply test
         run: terraform -chdir=terraform apply -auto-approve
+
+      - name: Terraform destroy test
+        run: terraform -chdir=terraform destroy -auto-approve
