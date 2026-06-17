@@ -1,0 +1,27 @@
+name: Test Runner
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: [self-hosted, platform-runner]
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Print runner info
+        run: |
+          echo "Runner is working"
+          whoami
+          pwd
+
+      - name: Terraform Version
+        run: terraform version
+
+      - name: Python Version
+        run: python3 --version
+
+      - name: Git Version
+        run: git --version
