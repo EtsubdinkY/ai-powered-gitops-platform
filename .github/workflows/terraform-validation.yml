@@ -32,5 +32,8 @@ jobs:
       - name: Terraform validate
         run: terraform -chdir=terraform validate
 
+      - name: AI Risk Reviewer
+        run: python3 ai-risk-reviewer/reviewer.py
+
       - name: Terraform plan
         run: terraform -chdir=terraform plan
