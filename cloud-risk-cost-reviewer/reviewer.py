@@ -1,28 +1,31 @@
 import os
+import sys
 
+sys.path.append(os.path.dirname(__file__))
+
+print("\n===================================")
+print(" Cloud Cost Estimate")
 print("===================================")
-print(" AI Risk Reviewer")
-print("===================================")
 
-issues = []
+from cost.cost_estimator import estimate_costs
 
-for root, dirs, files in os.walk("kubernetes"):
-    for file in files:
-        if file.endswith((".yaml", ".yml")):
-            path = os.path.join(root, file)
+cost_results = estimate_costs()
 
-            with open(path, "r") as f:
-                content = f.read()
-
-            if "latest" in content:
-                issues.append(f"[MEDIUM] latest image tag detected in {path}")
-
-            if "LoadBalancer" in content:
-                issues.append(f"[HIGH] LoadBalancer service detected in {path}")
-
-if issues:
-    print("\nIssues Found:\n")
-    for issue in issues:
-        print(issue)
+if not cost_results:
+    print("No Terraform resources found.")
 else:
-    print("No risks detected.")
+    for item in cost_results:
+        print(f"\nResource: {item['resource']}")
+        print(f"Service: {item['service']}")
+        print(f"File: {item['file']}")
+
+        if item["daily"] is not None:
+            print(f"Daily: ${item['daily']:.2f}")
+            print(f"Weekly: ${item['weekly']:.2f}")
+            print(f"Monthly: ${item['monthly']:.2f}")
+        else:
+            print("Daily: needs pricing lookup")
+            print("Weekly: needs pricing lookup")
+            print("Monthly: needs pricing lookup")
+
+        print(f"Note: {item['note']}")
