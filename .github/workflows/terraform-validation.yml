@@ -23,17 +23,6 @@ jobs:
           workload_identity_provider: projects/75857734333/locations/global/workloadIdentityPools/github-pool/providers/github-provider
           service_account: terraform-deployer@project-ff80b6ff-8c4e-4127-89e.iam.gserviceaccount.com
 
-      - name: Verify GCP Authentication
-        run: |
-          gcloud auth list
-          gcloud config list project
-
-      - name: Terraform version
-        run: terraform version
-
-      - name: Google Cloud CLI Version
-        run: gcloud version
-
       - name: Terraform fmt
         run: terraform -chdir=terraform fmt -check -recursive
 
@@ -43,5 +32,5 @@ jobs:
       - name: Terraform validate
         run: terraform -chdir=terraform validate
 
-      - name: Terraform destroy test
-        run: terraform -chdir=terraform destroy -auto-approve
+      - name: Terraform plan
+        run: terraform -chdir=terraform plan
