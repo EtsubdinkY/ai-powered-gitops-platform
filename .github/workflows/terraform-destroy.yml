@@ -25,4 +25,4 @@ jobs:
         run: terraform -chdir=terraform/environments/dev init
 
       - name: Terraform destroy
-        run: terraform -chdir=terraform destroy -auto-approve
+        run: terraform -chdir=terraform/environments/dev destroy -auto-approve
