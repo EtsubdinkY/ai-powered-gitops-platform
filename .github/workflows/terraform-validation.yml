@@ -33,9 +33,7 @@ jobs:
         run: terraform -chdir=terraform/environments/dev validate
 
       - name: Checkov Terraform Scan
-        run: |
-          pip3 install checkov
-          checkov -d terraform/environments/dev
+        run: checkov -d terraform/environments/dev
 
       - name: AI Risk Reviewer
         run: python3 cloud-risk-cost-reviewer/reviewer.py
