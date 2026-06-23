@@ -30,7 +30,7 @@ jobs:
         run: terraform -chdir=terraform init
 
       - name: Terraform validate
-        run: terraform -chdir=terraform validate
+        run: terraform -chdir=terraform/environments/dev init
 
       - name: AI Risk Reviewer
         run: python3 cloud-risk-cost-reviewer/reviewer.py

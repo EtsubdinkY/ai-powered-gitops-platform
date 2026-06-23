@@ -22,7 +22,7 @@ jobs:
           service_account: terraform-deployer@project-ff80b6ff-8c4e-4127-89e.iam.gserviceaccount.com
 
       - name: Terraform init
-        run: terraform -chdir=terraform init
+        run: terraform -chdir=terraform/environments/dev init
 
       - name: Terraform apply
         run: terraform -chdir=terraform apply -auto-approve
