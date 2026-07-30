@@ -2,6 +2,10 @@ resource "google_container_cluster" "this" {
   name     = var.cluster_name
   location = var.region
 
+  node_locations = [
+    "us-central1-a"
+  ]
+
   network    = var.network_id
   subnetwork = var.subnet_id
 
@@ -19,9 +23,14 @@ resource "google_container_cluster" "this" {
 }
 
 resource "google_container_node_pool" "primary" {
-  name       = "${var.cluster_name}-node-pool"
-  location   = var.region
-  cluster    = google_container_cluster.this.name
+  name     = "${var.cluster_name}-node-pool"
+  location = var.region
+  cluster  = google_container_cluster.this.name
+
+  node_locations = [
+    "us-central1-a"
+  ]
+
   node_count = var.node_count
 
   node_config {
